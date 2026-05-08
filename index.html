@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .card-container {
+      height: 280px;
+      perspective: 1000px;
+    }
+
+    label {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    input { display: none; }
+
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ddd;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    input:checked + .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      top: 0; left: 0;
+    }
+
+    /* FRONT FACE */
+    .flip-card-front {
+      background-color: white;
+      display: grid;
+      grid-template-rows: 1fr 50px;
+      padding: 15px;
+    }
+
+    .image-zone {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding-bottom: 5px;
+      overflow: hidden;
+    }
+
+    .card-image {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .front-title-wrapper {
+      background: linear-gradient(135deg, rgb(0, 84, 164), rgb(0, 174, 239));
+      clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
+      width: 100%;
+    }
+
+    .front-title {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      padding: 10px 5px;
+    }
+
+    /* BACK FACE */
+    .flip-card-back {
+      transform: rotateY(180deg);
+      background-color: rgb(0, 84, 164);
+      color: white;
+      padding: 0 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .flip-card-back h2 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
+
+    .flip-card-back p {
+      font-size: 0.85em;
+      line-height: 1.5em;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="cards-grid" id="cards-grid"></div>
+
+  <script>
+    fetch('cards.json')
+      .then(res => res.json())
+      .then(cards => {
+        const grid = document.getElementById('cards-grid');
+
+        cards.forEach((card, index) => {
+          const container = document.createElement('div');
+          container.className = 'card-container';
+
+          container.innerHTML = `
+            <label>
+              <div class="flip-card">
+                <input type="checkbox" />
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="image-zone">
+                      <img src="${card.image}" class="card-image" alt="${card.name}">
+                    </div>
+                    <div class="front-title-wrapper">
+                      <h1 class="front-title">${card.name}</h1>
+                    </div>
+                  </div>
+                  <div class="flip-card-back">
+                    <h2>${card.name}</h2>
+                    <p>${card.description}</p>
+                  </div>
+                </div>
+              </div>
+            </label>
+          `;
+
+          grid.appendChild(container);
+        });
+      })
+      .catch(err => {
+        console.error('Could not load cards.json:', err);
+        document.getElementById('cards-grid').innerHTML = '<p>Error loading cards. Make sure cards.json is in the same folder.</p>';
+      });
+  </script>
+</body>
+</html>

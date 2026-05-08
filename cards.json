@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Module authors",
+    "image": "images/Module authors.png",
+    "description": "Provide subject expertise and written content. Carry out interviews, feature in filmed content and identify additional academic contributors. Design assessment and submit to External Examiner for approval."
+  },
+  {
+    "name": "Tutor",
+    "image": "images/Tutor.png",
+    "description": "Can deliver wbsLive sessions, monitor and respond to online student activities."
+  },
+  {
+    "name": "TLC/LDO",
+    "image": "images/TLCLDO.png",
+    "description": "Teaching and Learning Consultants and Learning Design Officers review and advise on written and filmed content, advise on appropriate interactive activities, support filming and liaise with publishing and multimedia teams. Provide training."
+  },
+  {
+    "name": "Course directors",
+    "image": "images/Course directors.png",
+    "description": "Sign off on module and will inform changes/updates to GLOMBA."
+  },
+  {
+    "name": "Media team",
+    "image": "images/Media team.png",
+    "description": "Film and edit video footage, advise on video content types, create animations."
+  },
+  {
+    "name": "Publishing team",
+    "image": "images/Publishing team.png",
+    "description": "Create online content, edit and proof-read final versions, produce subtitles and transcripts."
+  },
+  {
+    "name": "Programme team",
+    "image": "images/Programme team.png",
+    "description": "Manage the administrative aspects of the programme, such as assessment deadlines and interactions with students."
+  },
+  {
+    "name": "SmartStage team",
+    "image": "images/SmartStage team.png",
+    "description": "Manage and operate an augmented reality digital stage with virtual environments. Provide technical expertise for live online sessions, support the setup and delivery of content on the stage and advise on effective use of its features."
+  }
+]
